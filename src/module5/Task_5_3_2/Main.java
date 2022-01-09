@@ -8,15 +8,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         double sum = 0;
         while (scanner.hasNext()) {
-            /*
-            * @todo избавиться от try{}catch{}
-            */
-            try {
+            if (scanner.hasNextDouble()) {
                 sum += Double.parseDouble(scanner.next());
-            } catch (NumberFormatException e) {
-
+            } else {
+                scanner.next();
             }
         }
-        System.out.printf("%.6f", sum);
+        System.out.printf("%.6f\n", sum);
     }
 }
