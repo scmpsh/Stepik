@@ -34,7 +34,7 @@ public class HumanTest {
     public static void main(String[] args) {
         Human[] human = {
                 new Human("Adam", "1789"),
-                new Human("Eva", "9871")
+                new Human("Eva", "9871234")
         };
         byte[] serialBytes;
         Human[] deserialHumans;
