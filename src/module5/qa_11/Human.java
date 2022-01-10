@@ -24,57 +24,39 @@ public class Human implements Externalizable {
 
     private String encryptString(String data) {
         System.out.println("Before encrypt: " + data);
-        String encryptData;
-        int[] numbersFromData = toIntArray(data.toCharArray());
-        int encryptNum = 0;
+        int[] intArray = toIntArray(data.toCharArray());
+        StringBuilder encryptData = new StringBuilder();
         int currentNum;
         int nextNum;
-        for (int i = 0; i < numbersFromData.length; i++) {
-            if (i + 1 == numbersFromData.length) {
-                currentNum = numbersFromData[i];
-                nextNum = numbersFromData[0];
-                encryptNum += (currentNum + nextNum) % 10;
-            } else {
-                currentNum = numbersFromData[i];
-                nextNum = numbersFromData[i + 1];
-                encryptNum += (currentNum + nextNum) % 10;
-                encryptNum *= 10;
-            }
+        int intArrayLength = intArray.length - 1;
+        for (int i = 0; i < intArrayLength; i++) {
+            currentNum = intArray[i];
+            nextNum = intArray[i + 1];
+            encryptData.append((currentNum + nextNum) % 10);
         }
-        encryptData = String.valueOf(encryptNum);
-        System.out.println("After encrypt: " + encryptData);
-        return encryptData;
+        encryptData.append(intArray[intArrayLength]);
+        System.out.println("After encrypt: " + encryptData + "\n");
+        return String.valueOf(encryptData);
     }
 
     private String decryptString(String data) {
         System.out.println("Before decrypt: " + data);
-        String decryptData;
-        int[] numbers = toIntArray(data.toCharArray());
+        int[] intArray = toIntArray(data.toCharArray());
+        StringBuilder decryptData = new StringBuilder();
         int currentNum;
         int prevNum;
-        int decryptNum = 0;
-        int numbersLength = numbers.length - 1;
+        int intArrayLength = intArray.length - 1;
 
-        for (int i = numbersLength; i >= 0; i--) {
-            if (numbers[i] == 0 && i == numbersLength) {
-                numbers[i] = numbers[0] + 1;
-            } else if (i == numbersLength) {
-                numbers[i] = Math.abs(numbers[i] - numbers[0]);
-            } else {
-                currentNum = (numbers[i] + 10);
-                prevNum = numbers[i + 1];
-                numbers[i] = (currentNum - prevNum) % 10;
-            }
+        for (int i = intArrayLength; i > 0; i--) {
+            currentNum = intArray[i - 1] + 10;
+            prevNum = intArray[i];
+            intArray[i - 1] = Math.abs(prevNum - currentNum) % 10;
         }
-        for (int i = 0; i < numbers.length; i++) {
-            decryptNum += numbers[i];
-            if (i != numbersLength) {
-                decryptNum *= 10;
-            }
+        for (int number : intArray) {
+            decryptData.append(number);
         }
-        decryptData = String.valueOf(decryptNum);
-        System.out.println("After decrypt: " + decryptData);
-        return decryptData;
+        System.out.println("After decrypt: " + decryptData + "\n");
+        return String.valueOf(decryptData);
     }
 
     @Override

@@ -34,17 +34,19 @@ public class HumanTest {
     public static void main(String[] args) {
         Human[] human = {
                 new Human("Adam", "1789"),
-                new Human("Eva", "9871234")
+                new Human("Eva", "9871234"),
+                new Human("Cole", "6217"),
         };
-        byte[] serialBytes;
-        Human[] deserialHumans;
+        byte[] serializeBytes;
+        Human[] deserializeHumans;
 
         System.out.println("\n**********ENCRYPT************\n");
-        serialBytes = serializeArray(human);
+        serializeBytes = serializeArray(human);
         System.out.println("\n**********DECRYPT************\n");
-        deserialHumans = deserializeArray(serialBytes);
+        deserializeHumans = deserializeArray(serializeBytes);
         System.out.println("\n**********RESULT************\n");
-        System.out.println("SERIALIZE: " + Arrays.toString(serialBytes));
-        System.out.println("DESERIALIZE: " + Arrays.toString(deserialHumans));
+        System.out.println("BEFORE: " + Arrays.toString(human));
+        System.out.println("SERIALIZE: " + Arrays.toString(serializeBytes));
+        System.out.println("DESERIALIZE: " + Arrays.toString(deserializeHumans));
     }
 }
