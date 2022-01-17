@@ -5,16 +5,23 @@ import java.io.Serializable;
 public class Car implements Cloneable, Serializable {
     private String name;
     private Driver driver;
+    private Driver passanger;
+
+    public void setPassanger(Driver passanger) {
+        this.passanger = passanger;
+    }
+
+    public Driver getPassanger() {
+        return passanger;
+    }
 
     public Car(String name, Driver driver) {
         this.name = name;
         this.driver = driver;
     }
 
-    /**
+    /*
      * Конструктор копирования поверхностный.
-     *
-     * @param otherCar
      */
 //    public Car(Car otherCar) {
 //        this(otherCar.getName(), otherCar.getDriver());
@@ -23,8 +30,8 @@ public class Car implements Cloneable, Serializable {
     /*
      * Глубокое копирование
      */
-    public Car(Car otherCar) throws CloneNotSupportedException {
-        this(otherCar.getName(), otherCar.getDriver().clone());
+    public Car(Car otherCar) {
+        this(otherCar.getName(), new Driver(otherCar.getDriver().getName(), otherCar.getDriver().getAge()));
     }
 
     public String getName() {

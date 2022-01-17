@@ -1,8 +1,6 @@
 package module5.qa_2;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Joke {
@@ -14,7 +12,7 @@ public class Joke {
             }""";
     private static final String JOKE_FILE = "/joke.java";
 
-    public static void process(File dir) throws IOException {
+    public static void createJokeFile(File dir) throws IOException {
 //        System.out.println(dir + JOKE_FILE);
         FileWriter fileWriter = new FileWriter(dir + JOKE_FILE);
         fileWriter.write(TEXT_OF_JOKE);
@@ -26,7 +24,7 @@ public class Joke {
         if (childDirList != null) {
             for (String childDir : childDirList) {
                 if ((new File(dir, childDir)).isDirectory()) {
-                    process(new File(dir, childDir));
+                    createJokeFile(new File(dir, childDir));
                 }
                 visitAllDirs(new File(dir, childDir));
             }

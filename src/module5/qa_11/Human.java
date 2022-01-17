@@ -26,15 +26,13 @@ public class Human implements Externalizable {
         System.out.println("Before encrypt: " + data);
         int[] intArray = toIntArray(data.toCharArray());
         StringBuilder encryptData = new StringBuilder();
-        int currentNum;
-        int nextNum;
-        int intArrayLength = intArray.length - 1;
-        for (int i = 0; i < intArrayLength; i++) {
-            currentNum = intArray[i];
-            nextNum = intArray[i + 1];
+
+        for (int i = 0; i < intArray.length - 1; i++) {
+            int currentNum = intArray[i];
+            int nextNum = intArray[i + 1];
             encryptData.append((currentNum + nextNum) % 10);
         }
-        encryptData.append(intArray[intArrayLength]);
+        encryptData.append(intArray[intArray.length - 1]);
         System.out.println("After encrypt: " + encryptData + "\n");
         return String.valueOf(encryptData);
     }
