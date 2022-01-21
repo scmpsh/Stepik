@@ -1,13 +1,17 @@
 package module5.qa_1;
 
 public abstract class Tool implements Workable {
-    private String sound;
+    Tool tool;
 
-    public Tool(String sound) {
-        this.sound = sound;
+    public Tool() {
     }
 
-    public String getSound() {
-        return sound;
+    public Tool(Tool tool) {
+        this.tool = tool;
+    }
+
+    @Override
+    public void work() {
+        System.out.println("звук абстрактного инструмента");
     }
 }
