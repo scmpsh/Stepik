@@ -12,8 +12,6 @@ public class Screwdriver extends Tool {
     @Override
     public void work() {
         System.out.println("звук отвертки");
-        if (tool != null) {
-            tool.work();
-        }
+        super.work();
     }
 }

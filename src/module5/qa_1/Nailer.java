@@ -12,8 +12,6 @@ public class Nailer extends Tool {
     @Override
     public void work() {
         System.out.println("звук гвоздодера");
-        if (tool != null) {
-            tool.work();
-        }
+        super.work();
     }
 }

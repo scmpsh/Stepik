@@ -12,8 +12,6 @@ public class Makita extends Tool {
     @Override
     public void work() {
         System.out.println("звук макиты");
-        if (tool != null) {
-            tool.work();
-        }
+        super.work();
     }
 }

@@ -12,6 +12,8 @@ public abstract class Tool implements Workable {
 
     @Override
     public void work() {
-        System.out.println("звук абстрактного инструмента");
+        if (tool != null) {
+            tool.work();
+        }
     }
 }

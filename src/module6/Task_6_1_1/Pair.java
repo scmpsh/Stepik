@@ -11,8 +11,8 @@ class Pair<I, S> {
         this.second = second;
     }
 
-    static Pair of(Object first, Object second) {
-        return new Pair(first, second);
+    static <I, S> Pair<I, S> of(I first, S second) {
+        return new Pair<>(first, second);
     }
 
     public I getFirst() {

@@ -7,36 +7,25 @@ import java.util.stream.Collectors;
 public class Main {
 
     private static List<String> getTextFromSystemIn() {
-        final String REGEX = "[^a-zа-я0-9]";
+//        final String REGEX = "\\b+[^\\wа-я]+\\b";
+        final String REGEX = "[^\\wа-я]";
         Scanner scanner = new Scanner(System.in, "UTF-8");
         List<String> result = new ArrayList<>();
-
         while (scanner.hasNext()) {
-            result.addAll(Arrays.asList(
-                    scanner.nextLine()
-                            .toLowerCase()
-                            .replaceAll(REGEX, " ")
-                            .split(" ", -1)
-            ));
+            result.addAll(Arrays.stream(scanner.nextLine().toLowerCase().split(REGEX))
+                    .filter(String::isBlank).toList());
         }
         return result;
     }
 
     private static Map<String, Long> countAndSortWords(List<String> text) {
-        Map<String, Long> result = text.stream()
-                .collect(Collectors.groupingBy(
-                        Function.identity(),
-                        Collectors.counting()
-                ));
-
-        Map<String, Long> sortedMap = new LinkedHashMap<>();
-        result.entrySet().stream()
-                .sorted(Map.Entry.<String, Long>comparingByValue()
-                        .reversed()
-                        .thenComparing(Map.Entry::getKey))
-                .forEachOrdered(e -> sortedMap.put(e.getKey(), e.getValue()));
-        sortedMap.remove("");
-        return sortedMap;
+        Map<String, Long> result = new LinkedHashMap<>();
+        text.stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .sorted(Map.Entry.<String, Long>comparingByValue().reversed().thenComparing(Map.Entry::getKey))
+                .forEachOrdered(t -> result.put(t.getKey(), t.getValue()));
+        return result;
     }
 
     private static void printFirstTenWords(Map<String, Long> map) {

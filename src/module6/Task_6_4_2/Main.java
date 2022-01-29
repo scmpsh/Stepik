@@ -2,12 +2,8 @@ package module6.Task_6_4_2;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static junit.framework.TestCase.assertEquals;
 
 public class Main {
 
@@ -15,15 +11,15 @@ public class Main {
             Stream<? extends T> stream,
             Comparator<? super T> order,
             BiConsumer<? super T, ? super T> minMaxConsumer) {
-        List<T> listOfStream = stream.collect(Collectors.toList());
+        Stream.Builder<T> copyOfStream = Stream.builder();
         minMaxConsumer.accept(
-                listOfStream.isEmpty() ? null : listOfStream.stream().min(order).get(),
-                listOfStream.isEmpty() ? null : listOfStream.stream().max(order).get()
+                stream.peek(copyOfStream).min(order).orElse(null),
+                copyOfStream.build().max(order).orElse(null)
         );
     }
 
     public static void main(String[] args) {
-        Stream stream = Arrays.stream(new Integer[]{10, 20, 1, 5, 8, 94, 1, -52, 0});
+        Stream<Integer> stream = Arrays.stream(new Integer[]{10, 20, 1, 5, 8, 94, 1, -52, 0});
         Comparator<Integer> comparator = Integer::compare;
         BiConsumer<Integer, Integer> biConsumer = (min, max) -> {
             System.out.println(min + " " + max);

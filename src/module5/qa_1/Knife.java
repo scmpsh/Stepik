@@ -12,8 +12,6 @@ public class Knife extends Tool {
     @Override
     public void work() {
         System.out.println("звук ножа");
-        if (tool != null) {
-            tool.work();
-        }
+        super.work();
     }
 }
