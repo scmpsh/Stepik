@@ -28,14 +28,6 @@ public class Main {
                 .forEach(System.out::println);
     }
 
-    private static void printFirstTenWords(Map<String, Long> map) {
-        final int TEN_WORDS = 10;
-
-        map.keySet().stream()
-                .limit(TEN_WORDS)
-                .forEach(System.out::println);
-    }
-
     public static void main(String[] args) {
         List<String> text = getTextFromSystemIn();
         countAndSortWords(text);
