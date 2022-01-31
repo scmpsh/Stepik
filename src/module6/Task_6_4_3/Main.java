@@ -18,14 +18,14 @@ public class Main {
         return result;
     }
 
-    private static Map<String, Long> countAndSortWords(List<String> text) {
-        Map<String, Long> result = new LinkedHashMap<>();
+    private static void countAndSortWords(List<String> text) {
         text.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet().stream()
                 .sorted(Map.Entry.<String, Long>comparingByValue().reversed().thenComparing(Map.Entry::getKey))
-                .forEachOrdered(t -> result.put(t.getKey(), t.getValue()));
-        return result;
+                .map(Map.Entry::getKey)
+                .limit(10)
+                .forEach(System.out::println);
     }
 
     private static void printFirstTenWords(Map<String, Long> map) {
@@ -38,7 +38,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> text = getTextFromSystemIn();
-        Map<String, Long> map = countAndSortWords(text);
-        printFirstTenWords(map);
+        countAndSortWords(text);
+//        printFirstTenWords(map);
     }
 }
