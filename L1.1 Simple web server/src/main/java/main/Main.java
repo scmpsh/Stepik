@@ -11,8 +11,16 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.internal.SessionImpl;
+import org.hibernate.procedure.ProcedureCall;
 import servlets.SignInServlet;
 import servlets.SignUpServlet;
+
+import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 
 public class Main {
 
@@ -26,18 +34,27 @@ public class Main {
 //        userDAOJDBC.dropTable();
 //        userDAOJDBC.createTable();
 //
+//        CallableStatement callableStatement = dbServiceJDBC
+//                .getConnection()
+//                .prepareCall("call helloworld()");
+//        callableStatement.execute();
+//
         DBServiceHibernate dbServiceHibernate = new DBServiceHibernate();
         dbServiceHibernate.printConnectInfo();
         UserDAO userDAOHibernate = dbServiceHibernate.getUserDAO();
-//
 
-//        dbService.addUserHibernate("nik1", "123");
+        ((SessionImpl)dbServiceHibernate.getSession()).connection()
+                .prepareCall("call helloworld()")
+                .execute();
+
+
+
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 //        context.addServlet(new ServletHolder(allRequestsServlet), "/*");
 //        context.addServlet(new ServletHolder(new SignUpServlet(userDAOJDBC)), "/signup");
 //        context.addServlet(new ServletHolder(new SignInServlet(userDAOJDBC)), "/signin");
-        context.addServlet(new ServletHolder(new SignUpServlet(userDAOHibernate)), "/signup");
-        context.addServlet(new ServletHolder(new SignInServlet(userDAOHibernate)), "/signin");
+//        context.addServlet(new ServletHolder(new SignUpServlet(userDAOHibernate)), "/signup");
+//        context.addServlet(new ServletHolder(new SignInServlet(userDAOHibernate)), "/signin");
 
 //        ResourceHandler resource_handler = new ResourceHandler();
 //        resource_handler.setResourceBase("/Users/migalnikita/Documents/JavaMentoring/JavaWeb/stepic_java_webserver/L1.1 Simple web server/public_html");

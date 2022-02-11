@@ -10,8 +10,10 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.SessionFactoryImpl;
+import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.service.ServiceRegistry;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -23,7 +25,7 @@ public class DBServiceHibernate {
     private static UserDAO userDAO;
     Session session;
 
-    public DBServiceHibernate() {
+    public DBServiceHibernate() throws SQLException {
         Configuration configuration = getPSQLConfiguration();
         sessionFactory = createSessionFactory(configuration);
         session = sessionFactory.openSession();
@@ -44,6 +46,10 @@ public class DBServiceHibernate {
         configuration.setProperty("logging.level.org.hibernate", "DEBUG");
         configuration.setProperty("hibernate.connection.autocommit", "true");
         return configuration;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     public Session getSession() {
