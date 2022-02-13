@@ -9,6 +9,4 @@ public interface UserDAO {
     UserDataSet getWithLogin(String name);
     long getUserId(String name) throws SQLException;
     long insertUser(String name, String password) throws SQLException;
-    void createTable() throws SQLException;
-    void dropTable() throws SQLException;
 }

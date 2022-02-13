@@ -22,10 +22,10 @@ public class DBServiceHibernate {
     private static final String HIBERNATE_SHOW_SQL = "true";
     private static final String HIBERNATE_HBM2DDL_AUTO = "create";
     private final SessionFactory sessionFactory;
-    private static UserDAO userDAO;
-    Session session;
+    private UserDAO userDAO;
+    private Session session;
 
-    public DBServiceHibernate() throws SQLException {
+    public DBServiceHibernate() {
         Configuration configuration = getPSQLConfiguration();
         sessionFactory = createSessionFactory(configuration);
         session = sessionFactory.openSession();

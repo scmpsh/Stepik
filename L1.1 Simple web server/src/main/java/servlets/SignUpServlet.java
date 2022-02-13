@@ -17,7 +17,6 @@ public class SignUpServlet extends HttpServlet {
         this.userDAO = userDAO;
     }
 
-    //sign up
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
@@ -50,21 +49,4 @@ public class SignUpServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-//        if (login != null && password != null && !login.equals("") && !password.equals("")) {
-//            if (accountService.getUserByLogin(login) != null
-//                    && accountService.getUserByLogin(login).getLogin().equals(login)) {
-//                response.setContentType("text/html;charset=utf-8");
-//                response.getWriter().println("OK: Account with this username already exists");
-//                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//            } else {
-//                accountService.addNewUser(new UserProfile(login, password));
-//                response.setContentType("text/html;charset=utf-8");
-//                response.getWriter().println("OK: You have successfully registered");
-//                response.setStatus(HttpServletResponse.SC_OK);
-//            }
-//        } else {
-//            response.setContentType("text/html;charset=utf-8");
-//            response.getWriter().println("ERROR: Enter some symbols in login and password");
-//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//        }
-    }
+}

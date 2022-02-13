@@ -40,14 +40,4 @@ public class UserDAOHibernate implements UserDAO {
     public long insertUser(String name, String password) throws SQLException {
         return (Long) session.save(new UserDataSet(name, password));
     }
-
-    @Override
-    public void createTable() throws SQLException {
-
-    }
-
-    @Override
-    public void dropTable() throws SQLException {
-
-    }
 }

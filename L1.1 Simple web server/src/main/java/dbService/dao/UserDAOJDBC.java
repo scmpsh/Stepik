@@ -58,19 +58,4 @@ public class UserDAOJDBC implements UserDAO {
         executor.execUpdate("insert into users (login, password) values ('" + name + "', '" + password + "');");
         return 1;
     }
-
-    public void deleteUser(long id) throws SQLException {
-        executor.execUpdate("delete * from users where id=" + id + ";");
-    }
-
-    @Override
-    public void createTable() throws SQLException {
-        executor.execUpdate("create table if not exists users (id serial not null, login varchar(256), " +
-                "password varchar(245), primary key (id))");
-    }
-
-    @Override
-    public void dropTable() throws SQLException {
-        executor.execUpdate("drop table users");
-    }
 }
